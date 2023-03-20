@@ -5,6 +5,7 @@ import { ClientLayout } from "../Layouts"
 
 export function WebRoutes() {
 
+  //funcion que carga dos funciones mas 
   const  loadLayout = (LoadLayout, Pages) => {
   return( 
     <LoadLayout>

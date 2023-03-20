@@ -6,7 +6,7 @@ export function ClientLayout(props) {
 
     return (
     <div>
-        <h2>Se esta cargando el ClientLayout</h2>
+        <h1>Se esta cargando el ClientLayout</h1>
 
         {children}
     </div>
