@@ -1,0 +1,56 @@
+// ~ -->  indica que puedes acceder al fichero raiz de index.scss
+// pero no lo autocomplementa
+@import "~/src/scss/index.scss";
+
+
+
+
+.auth {
+    background-image: url("../../../assets/jpg/auth-bg.jpg");
+    min-height: 100vh;
+    background-position: center;
+    background-size: contain;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 100px;
+
+    @media (min-width: 100px ) {
+
+            .logo{
+                width: 160px;
+                margin-bottom: 40px;
+                align-items: center;
+            }
+        
+
+    }
+
+
+    
+        // la condicio " & " lo que hace es contemplar con la clase padres por ejemplo 
+    // .auth__form
+    &__forms {
+       width: 650px;
+    
+    .ui.menu {
+        .item{
+            width: 50%;
+            justify-content: center;
+            background-color: #fff !important;
+            border-radius: 0 !important;
+            border-top: 4px solid $border-grey !important; 
+
+            &.active{
+                font-weight: normal;
+                border-radius: 5 !important;
+                border-top-color: $success !important;
+            }
+        }
+        
+    }
+
+
+    }
+
+}

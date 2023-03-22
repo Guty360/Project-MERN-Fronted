@@ -8,7 +8,7 @@ import {
 import { AdminLayout  } from "../Layouts";
 // import { map } from 'lodash';
 
-const user = { username: "Juan" };
+const user = null ;
 
 export function AdminRoutes() {
 
@@ -24,7 +24,7 @@ export function AdminRoutes() {
     <Routes>
         {/* validar un elemento user para verificar el acceso del usuario */}
         {!user ? (
-        <Route path='/admin/*' element={loadLayout(AdminLayout, Auth)}/>
+        <Route path='/admin/*' element={ <Auth /> }/>
         ) : (
           <>
           {/* cargar la misma ruta desde dos paths, con la funcion map de lodash*/}
