@@ -1,15 +1,15 @@
-import React from 'react'
+import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { WebRoutes, AdminRoutes } from "./routers"
+import { WebRoutes, AdminRoutes } from "./routers";
+import { AuthProvider } from "./context";
 
 export default function App() {
   return (
-    <BrowserRouter>
-        <WebRoutes/>
-        <AdminRoutes/>
-    </BrowserRouter>
-      
-  )
+    <AuthProvider>
+      <BrowserRouter>
+        <WebRoutes />
+        <AdminRoutes />
+      </BrowserRouter>
+    </AuthProvider>
+  );
 }
-
-

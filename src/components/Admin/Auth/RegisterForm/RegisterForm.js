@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./RegisterForm.scss";
 import { Form } from "semantic-ui-react";
 import { useFormik } from "formik";
-import { auth } from "../../../../api"
+import { auth } from "../../../../api";
 import { RegisterFormvalidations } from "./RegisterForm.validations" //validaciones del formulario
 
 function initialDatas(){
@@ -19,7 +19,7 @@ const authController = new auth();
 export function RegisterForm(props) {
 
   const { openLogin } = props;
-
+  
   const [error, seterror] = useState("");
 
   const formik = useFormik({
@@ -30,13 +30,11 @@ export function RegisterForm(props) {
         try {
           seterror("");
           await authController.register(formValue);
-          console.log(openLogin);
           openLogin();
         } catch (error) {
-         seterror("Error en el servidor")
+         seterror("Error al registrar un usuario!")
         }
       },
-
   });
 
   return (
@@ -61,7 +59,7 @@ export function RegisterForm(props) {
         type="password"
         placeholder="Repetir Contraseña"
         onChange={formik.handleChange}
-        value={formik.values.repeatpassword}
+        value={ formik.values.repeatpassword }
         error={ formik.errors.repeatpassword }
       />
       <Form.Checkbox
@@ -69,7 +67,6 @@ export function RegisterForm(props) {
         label="He leído y acepto las políticas de privacidad"
         onChange={ (_, data) => 
                 formik.setFieldValue("conditionsAccepted", data.checked)
-
         }
         checked={formik.values.conditionsAccepted}
         error={ formik.errors.conditionsAccepted }

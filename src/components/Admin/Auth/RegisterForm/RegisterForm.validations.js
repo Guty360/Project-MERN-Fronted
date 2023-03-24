@@ -6,7 +6,7 @@ export function RegisterFormvalidations() {
   return yup.object({
     email: yup
       .string()
-      .email("El email no es valido")
+      .email("El email no es válido")
       .required("Campo obligatorio"),
     password: yup.string().required("Campo obligatorio"),
     repeatpassword: yup

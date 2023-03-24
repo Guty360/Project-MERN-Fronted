@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Tab } from "semantic-ui-react";
 import "./Auth.scss";
 import { Icon } from "../../../assets";
-import { RegisterForm } from "../../../components/Admin/Auth"; //gestionar los datos del formulario y muestra en pantalla
+import { RegisterForm, Login } from "../../../components/Admin/Auth"; //gestionar los datos del formulario y muestra en pantalla
 
 export function Auth() {
   const [activeIndex, setactiveIndex] = useState(0);
@@ -15,7 +15,7 @@ export function Auth() {
       menuItem: "Entry to App",
       render: () => (
         <Tab.Pane>
-          <h2>Login form</h2>
+          <Login openLogin={openLogin} />
         </Tab.Pane>
       ),
     },
@@ -29,14 +29,16 @@ export function Auth() {
       ),
     },
   ];
+
   return (
+    // <></>
     <div className="auth">
       <Icon.LogoWhile className="logo" />
       <Tab
-        panes={panes}
+        panes={panes} //reenderizando los tab de panes
         className="auth__forms"
-        activeIndex={activeIndex}
-        onTabChange={(_, data) => setactiveIndex(data.activeIndex)}
+        activeIndex={activeIndex} //saber el valor del panel activo 
+        onTabChange={(_,data) =>  setactiveIndex(data.activeIndex)} //reconocer que panel de clickea
       />
     </div>
   );

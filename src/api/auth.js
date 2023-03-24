@@ -1,30 +1,74 @@
-
-import { ENV } from "../utils"
+import { ENV } from "../utils";
 
 export class auth {
-    baseApi = ENV.BASE_API;
+  baseApi = ENV.BASE_API;
 
-    async register(data){
-        try {
-            const url = `${this.baseApi}/${ENV.API_ROUTES.REGISTER}`;
-            const params = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: data.email,
-                    password: data.password,
-                })
-            };
+  async register(data) {
+    try {
+      //conection to BACKEND
+      const url = `${this.baseApi}/${ENV.API_ROUTES.REGISTER}`;
+      //Content to Send
+      const params = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+        }),
+      };
 
-            const response = await fetch(url, params);
-            const result = await response.json();
+      const response = await fetch(url, params);
+      const result = await response.json();
 
-            if(response.status !== 200) throw result;
-            return result;
-        } catch (error) {
-            throw error
-        }
+      if (response.status !== 200) throw result;
+      return result;
+    } catch (error) {
+      throw error;
     }
+  }
+
+  async login(data) {
+    try {
+      const url = `${this.baseApi}/${ENV.API_ROUTES.LOGIN}`;
+      const params = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+        }),
+      };
+      const response = await fetch(url, params);
+      const result = await response.json();
+
+      if (response.status !== 201) throw result;
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  setAccessToken(token) {
+    localStorage.setItem(ENV.JWT.ACCESS, token);
+  }
+  getAccessToken(){
+    return localStorage.getItem(ENV.JWT.ACCESS);
+  }
+
+  setRefreshToken(token) {
+    localStorage.setItem(ENV.JWT.REFRESH, token);
+  }
+  getRefreshToken(){
+    return localStorage.getItem(ENV.JWT.REFRESH);
+  }
+
+  removeTokens(){
+    localStorage.removeItem(ENV.JWT.ACCESS);
+    localStorage.removeItem(ENV.JWT.REFRESH);
+  }
+
 }

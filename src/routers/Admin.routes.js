@@ -7,11 +7,12 @@ import {
 } from "../pages/admin";
 import { AdminLayout  } from "../Layouts";
 // import { map } from 'lodash';
+import { useAuth } from "../hooks"
 
-const user = null ;
+// const user = null ;
 
 export function AdminRoutes() {
-
+  const { user } = useAuth();
   const loadLayout  = (Layout, Page) => {
     return (
       <Layout>
