@@ -13,6 +13,7 @@ import { useAuth } from "../hooks"
 
 export function AdminRoutes() {
   const { user } = useAuth();
+  //layout is a father and page is a son
   const loadLayout  = (Layout, Page) => {
     return (
       <Layout>
@@ -25,7 +26,7 @@ export function AdminRoutes() {
     <Routes>
         {/* validar un elemento user para verificar el acceso del usuario */}
         {!user ? (
-        <Route path='/admin/*' element={ <Auth /> }/>
+        <Route path="/admin/*" element={ <Auth /> }/>
         ) : (
           <>
           {/* cargar la misma ruta desde dos paths, con la funcion map de lodash*/}
@@ -33,7 +34,7 @@ export function AdminRoutes() {
               <Route key={path} path={path} element={loadLayout(AdminLayout, Blog)}/>
           ))}
 
-          <Route path='/admin/users' element={loadLayout(AdminLayout, Users)}/>
+          <Route path="/admin/users" element={loadLayout(AdminLayout, Users)}/>
           <Route path='/admin/courses' element={loadLayout(AdminLayout, Courses)}/>
           <Route path='/admin/menu' element={loadLayout(AdminLayout, Menu)}/>
           <Route path='/admin/newletter' element={loadLayout(AdminLayout, NewLetter)}/>
