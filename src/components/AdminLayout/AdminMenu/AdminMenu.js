@@ -6,13 +6,12 @@ import "./AdminMenu.scss";
 
 export function AdminMenu() {
   const { pathname } = useLocation();
-  const {
-    user: { role },
-  } = useAuth();
+const {
+  user: {role},
+} = useAuth();
 
   const isAdmin = role === "admin";
 
-  console.log("Es admin", isAdmin);
   const isCurrenPath = (path) => {
     if (path === pathname) {
       return true;
@@ -25,38 +24,42 @@ export function AdminMenu() {
     //estos elementos de menu son formato para la estructura de menu
     //esto facilita como quieres los elementos
     <Menu fluid vertical icon text className="admin-menu">
-      <Menu.Item
-        as={Link}
-        to="/admin/users"
-        active={isCurrenPath("/admin/users")}
-      >
-        <Icon name="user outline" />
-        Usuario
-      </Menu.Item>
-      <Menu.Item
-        as={Link}
-        to="/admin/menu"
-        active={isCurrenPath("/admin/menu")}
-      >
-        <Icon name="bars" />
-        Menu
-      </Menu.Item>
-      <Menu.Item
-        as={Link}
-        to="/admin/courses"
-        active={isCurrenPath("/admin/courses")}
-      >
-        <Icon name="graduation" />
-        Cursos
-      </Menu.Item>
-      <Menu.Item
-        as={Link}
-        to="/admin/newletter"
-        active={isCurrenPath("/admin/newletter")}
-      >
-        <Icon name="mail outline" />
-        NewSletter
-      </Menu.Item>
+      {isAdmin && (
+        <>
+          <Menu.Item
+            as={Link}
+            to="/admin/users"
+            active={isCurrenPath("/admin/users")}
+          >
+            <Icon name="user outline" />
+            Usuario
+          </Menu.Item>
+          <Menu.Item
+            as={Link}
+            to="/admin/menu"
+            active={isCurrenPath("/admin/menu")}
+          >
+            <Icon name="bars" />
+            Menu
+          </Menu.Item>
+          <Menu.Item
+            as={Link}
+            to="/admin/courses"
+            active={isCurrenPath("/admin/courses")}
+          >
+            <Icon name="graduation" />
+            Cursos
+          </Menu.Item>
+          <Menu.Item
+            as={Link}
+            to="/admin/newletter"
+            active={isCurrenPath("/admin/newletter")}
+          >
+            <Icon name="mail outline" />
+            NewSletter
+          </Menu.Item>
+        </>
+      )}
       <Menu.Item
         as={Link}
         to="/admin/blog"
