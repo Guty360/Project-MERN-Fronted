@@ -12,7 +12,7 @@ const Icon = {
   Logo
 };
 
-const Image = {
+const image = {
   authbg,
   homeBanner,
   noAvatar,
@@ -20,4 +20,4 @@ const Image = {
   teamwork,
 };
 
-export { Icon, Image};
+export { Icon, image};

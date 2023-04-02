@@ -5,7 +5,7 @@ export class Users {
 
   async getMe(accessToken) {
     try {
-        //url de conexion con el backend
+      //url de conexion con el backend
       const url = `${this.baseApi}/${ENV.API_ROUTES.USER_ME}`;
       const params = {
         method: "GET",
@@ -15,11 +15,42 @@ export class Users {
       };
 
       const response = await fetch(url, params);
-        const result = await response.json();
+      const result = await response.json();
 
-        if (response.status !== 200) throw result;
+      if (response.status !== 200) throw result;
 
-        return result;
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async createUser(accessToken, data) {
+    try {
+      const formData = new FormData();
+
+      Object.keys(data).forEach((key) => {
+        formData.append(key, data[key]);
+      });
+
+      if (data.fileAvatar) {
+        formData.append("avatar", data.fileAvatar);
+      }
+      const url = `${this.baseApi}/${ENV.API_ROUTES.USERS}`;
+      const params = {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: formData,
+      };
+
+      const response = await fetch(url, params);
+      const result =await response.json();
+
+      if (response.status !== 200) throw result;
+
+      return result;
     } catch (error) {
       throw error;
     }

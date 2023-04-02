@@ -1,0 +1,15 @@
+.users-pages{
+
+    &__add{
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    >.ui.button {
+        margin: 0;
+        background-color: rgb(23, 114, 136);
+        color: rgb(33, 183, 224);
+    }
+
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import "./AdminLayout.scss";
 import { Icon } from "../../assets";
-import { AdminMenu } from "../../components/AdminLayout";
+import { AdminMenu, Logout } from "../../components/AdminLayout";
 
 export function AdminLayout(props) {
   const { children } = props;
@@ -15,7 +15,7 @@ export function AdminLayout(props) {
       </div>
       <div className="admin-layout__right">
         <div className="admin-layout__right-header">
-          <span>LOGOUT</span>
+         <Logout/>
         </div>
         <div className="admin-layout__right-content">{children}</div>
       </div>
