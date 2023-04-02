@@ -32,6 +32,7 @@ export class Users {
       Object.keys(data).forEach((key) => {
         formData.append(key, data[key]);
       });
+      console.log(formData);
 
       if (data.fileAvatar) {
         formData.append("avatar", data.fileAvatar);
@@ -46,10 +47,29 @@ export class Users {
       };
 
       const response = await fetch(url, params);
-      const result =await response.json();
+      const result = await response.json();
 
       if (response.status !== 200) throw result;
 
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getUserFunction(accessToken, active = undefined) {
+    try {
+      const url = `${this.baseApi}/${ENV.API_ROUTES.GET_USERS}?active=${active}`;
+      const params = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      const response = await fetch(url, params);
+      const result = response.json();
+
+      if (response.status !== 200) throw result;
       return result;
     } catch (error) {
       throw error;

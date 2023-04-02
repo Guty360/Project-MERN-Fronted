@@ -51,22 +51,21 @@ export function UserForm(props) {
       <div className="user-form__avatar" {...getRootProps()}>
         <input {...getInputProps()} />
         <Image avatar size="small" src={getAvatar()} />
-        <h1>Choose an image</h1>
       </div>
       <Form.Group widths={"equal"}>
         <Form.Input
-          name="firstname"
+          name="firstName"
           placeholder="Nombre"
           onChange={formik.handleChange}
-          value={formik.values.firstname}
-          error={formik.errors.firstname}
+          value={formik.values.firstName}
+          error={formik.errors.firstName}
         ></Form.Input>
         <Form.Input
-          name="lastname"
+          name="lastName"
           placeholder="Apellidos"
           onChange={formik.handleChange}
-          value={formik.values.lastname}
-          error={formik.errors.lastname}
+          value={formik.values.lastName}
+          error={formik.errors.lastName}
         ></Form.Input>
       </Form.Group>
 
