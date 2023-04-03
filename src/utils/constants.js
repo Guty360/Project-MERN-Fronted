@@ -10,6 +10,8 @@ export const ENV = {
     USER_ME: "user/me",
     USERS: "user/create",
     GET_USERS: "users",
+    UPDATE_USER: "user",
+    DELETE_USER: "user",
   },
   JWT: {
     ACCESS: "access",

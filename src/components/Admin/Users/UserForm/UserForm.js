@@ -6,6 +6,7 @@ import { initialValues, ValidationSchema } from "./UserFormValidate";
 import { image } from "../../../../assets";
 import { Users } from "../../../../api";
 import { useAuth } from "../../../../hooks";
+import { ENV } from "../../../../utils";
 import "./UserFrom.scss";
 
 const userController = new Users();
@@ -15,12 +16,18 @@ export function UserForm(props) {
   const { accesToken } = useAuth();
 
   const formik = useFormik({
-    initialValues: initialValues(),
-    validationSchema: ValidationSchema(),
+    initialValues: initialValues(user),
+    validationSchema: ValidationSchema(user),
     validateOnChange: false,
     onSubmit: async (formValue) => {
       try {
-        await userController.createUser(accesToken, formValue);
+        if (!user) {
+          await userController.createUser(accesToken, formValue);
+        } else {
+          await userController.updateUser(accesToken, user._id, formValue);
+        }
+
+        onReload();
         close();
       } catch (error) {
         console.error(error);
@@ -38,6 +45,8 @@ export function UserForm(props) {
   const getAvatar = () => {
     if (formik.values.fileAvatar) {
       return formik.values.avatar;
+    } else if (formik.values.avatar) {
+      return `${ENV.BASE_PATH}/${formik.values.avatar}`;
     }
     return image.noAvatar;
   };

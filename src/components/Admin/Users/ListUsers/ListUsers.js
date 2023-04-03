@@ -8,7 +8,7 @@ import { UserItem } from "../UserItem";
 const userController = new Users();
 
 export function ListUsers(props) {
-  const { userActive } = props;
+  const { userActive, reload, onReload } = props;
   const [user, setUser] = useState(null);
 
   const { accesToken } = useAuth();
@@ -27,12 +27,12 @@ export function ListUsers(props) {
         console.error(error);
       }
     })();
-  }, [accesToken, userActive]);
+  }, [accesToken, userActive, reload]);
 
   if (!user) return <Loader active inline="centered" />;
 
   if (!size === 0) return "No Hay Ningún Usuario";
   return map(user, (user) => (
-    <UserItem key={user._id} user={user} />
+    <UserItem key={user._id} user={user} onReload={onReload}/>
   ));
 }
