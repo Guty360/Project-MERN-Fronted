@@ -29,7 +29,6 @@ export function Auth() {
       ),
     },
   ];
-
   return (
     // <></>
     <div className="auth">
@@ -38,8 +37,8 @@ export function Auth() {
         panes={panes} //reenderizando los tab de panes
         className="auth__forms"
         activeIndex={activeIndex} //saber el valor del panel activo 
-        onTabChange={(_,data) =>  setactiveIndex(data.activeIndex)} //reconocer que panel de clickea
+        onTabChange={(_,data) => setactiveIndex(data.activeIndex)} //reconocer que panel de clickea
       />
-    </div>
+    </div>  
   );
 }

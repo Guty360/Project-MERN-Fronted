@@ -22,7 +22,9 @@ export function ListUsers(props) {
           accesToken,
           userActive
         );
+
         setUser(response);
+
       } catch (error) {
         console.error(error);
       }
@@ -31,7 +33,7 @@ export function ListUsers(props) {
 
   if (!user) return <Loader active inline="centered" />;
 
-  if (!size === 0) return "No Hay Ningún Usuario";
+  if (!size(user) === 0) return "No Hay Ningún Usuario";
   return map(user, (user) => (
     <UserItem key={user._id} user={user} onReload={onReload}/>
   ));

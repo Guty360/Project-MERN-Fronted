@@ -6,14 +6,13 @@ import {
   initialValues,
   validationsSchemaLogin,
 } from "../LoginForm/LoginValidations";
-import { auth } from "../../../../api"
-import { useAuth } from "../../../../hooks"
+import { auth } from "../../../../api";
+import { useAuth } from "../../../../hooks";
 
 const loginController = new auth();
 
 export function Login() {
-
-  const {login} = useAuth();
+  const { login } = useAuth();
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -30,8 +29,8 @@ export function Login() {
         // se guarda dentro del localStorage
         loginController.setAccessToken(response.access);
         loginController.setRefreshToken(response.refresh);
-        
-        login(response.access)
+
+        login(response.access);
       } catch (error) {
         console.error(error);
       }
@@ -51,7 +50,7 @@ export function Login() {
         name="password"
         type="password"
         placeholder="Contraseña"
-        onChange={ formik.handleChange}
+        onChange={formik.handleChange}
         value={formik.values.password}
         error={formik.errors.password}
       />
@@ -59,7 +58,6 @@ export function Login() {
       <Form.Button type="submit" primary fluid loading={formik.isSubmitting}>
         Entrar
       </Form.Button>
-      
     </Form>
   );
 }

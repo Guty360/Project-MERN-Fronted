@@ -1,23 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { Tab, Button } from "semantic-ui-react";
-import { ListMenu } from "../../../components/Admin/Menu";
+import { ListMenu, MenuForm } from "../../../components/Admin/Menu";
+import { BasicModal } from "../../../components/Admin/Shared";
 import "./Menu.scss";
 
 export function Menu() {
+  const [showModal, setShowModal] = useState(false);
+  const [reload, setReload] = useState(false);
+
+  const onOpenCloseModal = () => setShowModal((prevState) => !prevState);
+  const onReload = () => setReload((prevState) => !prevState);
+
   const panes = [
     {
-      menuItem: "Menu Activos",
+      menuItem: "Menus Activos",
       render: () => (
         <Tab.Pane attached={false}>
-          <ListMenu active={true}/>
+          <ListMenu active={true} reload={reload}/>
         </Tab.Pane>
       ),
     },
     {
-      menuItem: "Menu Inactivos",
+      menuItem: "Menus Inactivos",
       render: () => (
         <Tab.Pane attached={false}>
-          <ListMenu active={false}/>
+          <ListMenu active={false} reload={reload}/>
         </Tab.Pane>
       ),
     },
@@ -26,9 +33,18 @@ export function Menu() {
   return (
     <>
       <div className="menu-page">
-        <Button className="menu-page__add">Nuevo Menu</Button>
+        <Button className="menu-page__add" primary onClick={onOpenCloseModal}>
+          Nuevo Menu
+        </Button>
         <Tab menu={{ secondary: true }} panes={panes} />
       </div>
+      <BasicModal
+        show={showModal}
+        close={onOpenCloseModal}
+        title="Crear Nuevo Menu"
+      >
+        <MenuForm onClose={onOpenCloseModal} onReload={onReload} />
+      </BasicModal>
     </>
   );
 }
