@@ -1,18 +1,37 @@
 import React from "react";
 import { Form, Dropdown, Input } from "semantic-ui-react";
 import { useFormik } from "formik";
+import { Menu } from "../../../../api";
+import { useAuth } from "../../../../hooks";
 import { initialValues, validationSchema } from "./MenuFormValidate";
 
+const menuController = new Menu();
+
 export function MenuForm(props) {
-  const { onClose, onReoad, menu } = props;
+  const { onClose, onReload, menu } = props;
+  const { accesToken } = useAuth();
 
   const formik = useFormik({
-    initialValues: initialValues(),
+    initialValues: initialValues(menu),
     validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async (formValue) => {
       try {
-        console.log(formValue);
+        const data = {
+          tipo: formValue.title,
+          path: `${formValue.protocol}${formValue.path}`,
+          order: formValue.order,
+          active: formValue.active,
+        };
+
+        if (menu) {
+          data.path = formValue.path
+         await menuController.updateMenu(accesToken, menu._id, data)
+        } else {
+          await menuController.createMenu(accesToken, data);
+        }
+        onReload();
+        onClose();
       } catch (error) {
         console.error(error);
       }
