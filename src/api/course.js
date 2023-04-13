@@ -6,7 +6,7 @@ export class Course {
     try {
       
       const pageFilter = `page=${params?.page || 1}`;
-      const limitFilter = `limit=${params?.limit || 10}`;
+      const limitFilter = `limit=${params?.limit || 5}`;
 
       const url = `${this.baseApi}/${ENV.API_ROUTES.COURSE}?${pageFilter}&${limitFilter}`;
       const param = {
